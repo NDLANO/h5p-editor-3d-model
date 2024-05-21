@@ -1,0 +1,20 @@
+.h5peditor-3d-model-container{
+
+  .file {
+    .display-none {
+      display: none;
+    }
+  }
+
+  .threeDModel .h5peditor-3d-model-file-icon {
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 1.1em;
+    height: 4.5em;
+    line-height: 4em;
+    text-align: center;
+    width: 6em;
+  }
+}
