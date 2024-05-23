@@ -69,17 +69,22 @@ export default class ThreeDModel {
       return;
     }
 
+    // H5P integration may append query parameters or a fragment
+    const srcWithoutApendix = src.split('#').shift().split('?').shift();
     if (
-      !src.endsWith('.gltf') &&
-      !src.endsWith('.glb')
+      !srcWithoutApendix.endsWith('.gltf') &&
+      !srcWithoutApendix.endsWith('.glb')
     ) {
-      return;
+      return; // Only support GLTF and GLB
     }
 
     // Set model
     this.dom.setAttribute('src', src);
   }
 
+  /**
+   * Update dom aspect ratio from model aspect ratio.
+   */
   updateAspectRatio() {
     const dimensions = this.getDimensions();
     if (!dimensions) {
@@ -89,6 +94,10 @@ export default class ThreeDModel {
     this.dom.style.aspectRatio = `${dimensions.x} / ${dimensions.y}`;
   }
 
+  /**
+   * Get model dimensions.
+   * @returns {object|undefined} Dimensions.
+   */
   getDimensions() {
     if (!this.dom.getDimensions) {
       return; // May not be ready yet
@@ -97,6 +106,11 @@ export default class ThreeDModel {
     return this.dom.getDimensions();
   }
 
+  /**
+   * Build a11y attributes.
+   * @param {object} params Parameters.
+   * @returns {string} A11y attributes as JSON string.
+   */
   buildA11y(params = {}) {
     const a11yProps = [
       'back', 'front', 'left', 'right',
