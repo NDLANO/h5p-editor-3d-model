@@ -61,6 +61,7 @@ export default class ThreeDModel {
     dom.setAttribute('a11y', this.buildA11y(params.a11y));
 
     dom.addEventListener('load', () => {
+      this.updateAspectRatio();
       this.callbacks.onLoad();
     });
 

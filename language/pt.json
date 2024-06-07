@@ -9,6 +9,8 @@
     "notAFolder": "Esta não era uma pasta.",
     "onlyEmbeddedAssets": "Tentou carregar um ficheiro (upload) glTF sem recursos incorporados. Deve estar dentro de uma pasta com outros ficheiros. Solte essa pasta no ponto de aterragem para criar um único ficheiro que possa ser utilizado.",
     "onlyVersionTwo": "Este ficheiro glTF é da versão 1.0. Converta-o a versão 2.0 para o utilizar aqui.",
-    "placeAnnotation": "Place annotation in 3D model"
+    "placeAnnotation": "Place annotation in 3D model",
+    "sizeUp": "Size up",
+    "sizeDown": "Size down"
   }
 }

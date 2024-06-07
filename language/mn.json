@@ -9,6 +9,8 @@
     "notAFolder": "Энэ хавтас биш байсан.",
     "onlyEmbeddedAssets": "Та оруулсан хөрөнгөгүй glTF файлыг байршуулахыг оролдсон. Энэ нь бусад файлуудтай хавтас дотор байх ёстой. Ашиглах боломжтой ганц файл үүсгэхийн тулд уг фолдерыг dropzone дээр буулгана уу.",
     "onlyVersionTwo": "Энэ glTF файл нь 1.0 хувилбар юм. Үүнийг энд ашиглахын тулд 2.0 хувилбар руу хөрвүүлнэ үү.",
-    "placeAnnotation": "Place annotation in 3D model"
+    "placeAnnotation": "Place annotation in 3D model",
+    "sizeUp": "Size up",
+    "sizeDown": "Size down"
   }
 }

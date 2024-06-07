@@ -9,6 +9,8 @@
     "notAFolder": "Tai nebuvo aplankas.",
     "onlyEmbeddedAssets": "Bandėte įkelti glTF failą be įterptųjų išteklių. Jis turėtų būti aplanke su kitais failais. Nutempkite tą aplanką į metimo zoną, kad sukurtumėte vieną failą, kurį būtų galima naudoti.",
     "onlyVersionTwo": "Šis glTF failas yra 1.0 versijos. Konvertuokite jį į 2.0 versiją, kad galėtumėte jį naudoti čia.",
-    "placeAnnotation": "Place annotation in 3D model"
+    "placeAnnotation": "Place annotation in 3D model",
+    "sizeUp": "Size up",
+    "sizeDown": "Size down"
   }
 }

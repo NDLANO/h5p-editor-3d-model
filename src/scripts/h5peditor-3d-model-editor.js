@@ -80,6 +80,27 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
       this.preview.getDOM(), this.filePreview
     );
 
+    this.filePreview.style.clear = 'none';
+
+    this.resizeButton = document.createElement('button');
+    this.resizeButton.classList.add('h5peditor-3d-model-resize-button');
+    this.resizeButton.addEventListener('click', () => {
+      const small = this.preview.getDOM().classList.contains('large');
+
+      this.preview.getDOM().classList.toggle('large', !small);
+      this.resizeButton.classList.toggle('large', !small);
+
+      const ariaLabel = small ?
+        H5PEditor.t('H5PEditor.ThreeDModel', 'sizeUp') :
+        H5PEditor.t('H5PEditor.ThreeDModel', 'sizeDown');
+      this.resizeButton.setAttribute('aria-label', ariaLabel);
+    });
+    this.resizeButton.setAttribute(
+      'aria-label', H5PEditor.t('H5PEditor.ThreeDModel', 'sizeUp')
+    );
+
+    this.filePreview.after(this.resizeButton);
+
     this.fieldInstance.confirmRemovalDialog.on('confirmed', () => {
       this.filePreview.classList.remove('display-none');
     });
@@ -120,6 +141,7 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
 
     this.fieldInstance.on('uploadProgress', () => {
       this.preview.hide();
+      this.resizeButton.classList.add('display-none');
       this.trigger('previewVisibilityChanged', { visibility: false });
     });
 
@@ -174,6 +196,7 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
     this.trigger('modelReset');
 
     this.preview.hide();
+    this.resizeButton.classList.add('display-none');
     this.trigger('previewVisibilityChanged', { visibility: false });
   }
 
@@ -193,6 +216,7 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
     this.preview.setModel(src);
 
     this.preview.show();
+    this.resizeButton.classList.remove('display-none');
     this.trigger('previewVisibilityChanged', { visibility: true });
   }
 

@@ -9,6 +9,8 @@
     "notAFolder": "هذا لم يكن مجلد.",
     "onlyEmbeddedAssets": "حاولت تحميل ملف gITF بدون أصول مضمنة. يجب أن يكون داخل مجلد مع ملفات أخرى. انقل ذلك المجلد إلى منطقة الإفلات لإنشاء ملف منفرد يمكن استخدامه.",
     "onlyVersionTwo": "ملف glTF هذا هو نسخة 1.0. من فضلك حوله إلى النسخة 2.0 لاستخدامه هنا.",
-    "placeAnnotation": "Place annotation in 3D model"
+    "placeAnnotation": "Place annotation in 3D model",
+    "sizeUp": "Size up",
+    "sizeDown": "Size down"
   }
 }

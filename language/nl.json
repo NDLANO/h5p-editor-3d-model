@@ -9,6 +9,8 @@
     "notAFolder": "Dis is geen map.",
     "onlyEmbeddedAssets": "Je probeerde een gITF-bestand te uploaden zonder ingesloten media. Het bestand moet in een map zitten met andere bestanden. Zet die map in het neerzetgebied om een enkel bestand te maken dat kan worden gebruikt.",
     "onlyVersionTwo": "Dit gITF-bestand is van versie 1.0. Converteer dit eerst naar versie 2.0 om het hier te kunnen gebruiken.",
-    "placeAnnotation": "Place annotation in 3D model"
+    "placeAnnotation": "Place annotation in 3D model",
+    "sizeUp": "Size up",
+    "sizeDown": "Size down"
   }
 }
