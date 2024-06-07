@@ -93,6 +93,7 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
         H5PEditor.t('H5PEditor.ThreeDModel', 'sizeUp');
       this.resizeButton.setAttribute('aria-label', ariaLabel);
     });
+
     this.resizeButton.setAttribute(
       'aria-label', H5PEditor.t('H5PEditor.ThreeDModel', 'sizeUp')
     );

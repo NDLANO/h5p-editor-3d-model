@@ -36,6 +36,10 @@ export default class threeDModelPreview {
     this.dom = document.createElement('div');
     this.dom.classList.add('h5peditor-3d-model-preview-wrapper');
 
+    this.dom.addEventListener('transitionend', () => {
+      window.parent.dispatchEvent(new Event('resize'));
+    });
+
     const preview = document.createElement('div');
     preview.classList.add('h5peditor-3d-model-preview');
     preview.appendChild(this.model.getDOM());
