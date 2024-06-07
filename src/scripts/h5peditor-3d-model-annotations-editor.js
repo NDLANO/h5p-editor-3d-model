@@ -316,6 +316,10 @@ export default class threeDModelAnnotationsEditor {
   handleDocumentClicked(event, id) {
     // The order in which the event listeners are called is not guaranteed
     if (event instanceof PointerEvent) {
+      if (event.target.classList.contains('h5peditor-3d-model-resize-button')) {
+        return; // Ignore, so people can still resize the preview
+      }
+
       // Clicked somewhere else
       document.removeEventListener('click', this.handleDocumentClicked);
 
