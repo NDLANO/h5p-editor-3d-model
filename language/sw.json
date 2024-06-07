@@ -8,6 +8,7 @@
     "noGLTFFound": "Hakuna faili la Umbizo la Usambazaji wa glTF kwenye folda hili",
     "notAFolder": "Hili halikuwa kabrasha.",
     "onlyEmbeddedAssets": "Ulijaribu kupakia faili la Umbizo la Usambazaji wa GL (glTF) bila faili zilizoingia. Inapaswa kuwa ndani ya folda na mafaili mengine. Weka folda hilo kwenye eneo la kushuka ili kuunda faili moja ambalo linaweza kutumika.",
-    "onlyVersionTwo": "Faili hili la Umbizo la Usambazaji wa glTF ni la toleo 1.0. Tafadhali kubadilisha kwa toleo 2.0 ili kutumia hapa."
+    "onlyVersionTwo": "Faili hili la Umbizo la Usambazaji wa glTF ni la toleo 1.0. Tafadhali kubadilisha kwa toleo 2.0 ili kutumia hapa.",
+    "placeAnnotation": "Place annotation in 3D model"
   }
 }

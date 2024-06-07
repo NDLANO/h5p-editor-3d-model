@@ -8,6 +8,7 @@
     "noGLTFFound": "Es ist keine glTF-Datei in diesem Ordner",
     "notAFolder": "Das war kein Ordner.",
     "onlyEmbeddedAssets": "Du hast versucht, eine glTF-Datei ohne eingebettete Medien hochzuladen. Sie sollte in einem Ordner mit anderen Dateien liegen. Ziehe diesen Ordner auf das Ablagefeld, um eine einzelne Datei zu erzeugen, die benutzt werden kann.",
-    "onlyVersionTwo": "Diese glTF-Datei hat die Version 1.0. Bitte konvertiere sie zu Version 2.0, um sie hier zu benutzen."
+    "onlyVersionTwo": "Diese glTF-Datei hat die Version 1.0. Bitte konvertiere sie zu Version 2.0, um sie hier zu benutzen.",
+    "placeAnnotation": "Platziere die Annotation im 3D-Modell"
   }
 }

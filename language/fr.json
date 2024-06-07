@@ -8,6 +8,7 @@
     "noGLTFFound": "Il n’y a pas de fichier glTF dans ce répertoire",
     "notAFolder": "Il ne s'agissait pas d'un répertoire.",
     "onlyEmbeddedAssets": "Vous avez essayé de télécharger un fichier glTF sans ressources intégrées. Le fichier devrait être dans un répertoire avec d’autres fichiers. Déposer ce répertoire dans la Dropzone afin de créer un fichier unique qui peut être utilisé.",
-    "onlyVersionTwo": "Ce fichier glTF est de la version 1.0. Veuillez le convertir à la version 2.0 afin de pouvoir l’utiliser ici."
+    "onlyVersionTwo": "Ce fichier glTF est de la version 1.0. Veuillez le convertir à la version 2.0 afin de pouvoir l’utiliser ici.",
+    "placeAnnotation": "Place annotation in 3D model"
   }
 }

@@ -8,6 +8,7 @@
     "noGLTFFound": "Não há arquivo glTF nesta pasta",
     "notAFolder": "Esta não era uma pasta.",
     "onlyEmbeddedAssets": "Você tentou carregar um arquivo (upload) glTF sem recursos incorporados. Deve estar dentro de uma pasta com outros arquivos. Solte essa pasta na zona de soltura para criar um único arquivo que possa ser usado.",
-    "onlyVersionTwo": "Este arquivo glTF é da versão 1.0. Por favor, converta-o para a versão 2.0 para usá-lo aqui."
+    "onlyVersionTwo": "Este arquivo glTF é da versão 1.0. Por favor, converta-o para a versão 2.0 para usá-lo aqui.",
+    "placeAnnotation": "Place annotation in 3D model"
   }
 }

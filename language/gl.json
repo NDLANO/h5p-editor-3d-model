@@ -8,6 +8,7 @@
     "noGLTFFound": "Non hai ningún ficheiro gITF neste cartafol",
     "notAFolder": "Isto non era un cartafol.",
     "onlyEmbeddedAssets": "Intentaches subir un ficheiro gITF sen activos incrustados. Debería estar nun cartafol con outros ficheiros. Solta o cartafol na zona de solta para crear un ficheiro único que poida usarse.",
-    "onlyVersionTwo": "Este ficheiro gITF ten a versión 1.0. Por favor, convérteo á versión 2.0 para poder usalo aquí."
+    "onlyVersionTwo": "Este ficheiro gITF ten a versión 1.0. Por favor, convérteo á versión 2.0 para poder usalo aquí.",
+    "placeAnnotation": "Place annotation in 3D model"
   }
 }

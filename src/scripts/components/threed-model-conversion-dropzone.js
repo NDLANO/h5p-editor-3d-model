@@ -1,7 +1,7 @@
 import threeDModelGLTF2GLB from '@services/gltf2glb.js';
 import './threed-model-conversion-dropzone.scss';
 
-class threeDModelConversionDropzone {
+export default class threeDModelConversionDropzone {
   /**
    * Dropzone to convert folders with gltf assets to glb
    * @class H5PEditor.ThreeDModelConversionDropzone
@@ -78,5 +78,3 @@ class threeDModelConversionDropzone {
     });
   }
 }
-
-export default threeDModelConversionDropzone;

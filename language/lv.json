@@ -8,6 +8,7 @@
     "browserCannotConvert": "Jūs mēģinājāt augšupielādēt glTF failu bez iegultiem līdzekļiem. Šajā pārlūkprogrammā netiek atbalstīta tūlītēja konvertēšana uz .glb failiem. Lūdzu, meklējiet alternatīvu pārveidotāju.",
     "fileDamaged": "Neizdevās pārbaudīt failu. Tas varētu būt bojāts.",
     "noGLTFFound": "Šajā mapē nav glTF faila",
-    "onlyEmbeddedAssets": "Jūs mēģinājāt augšupielādēt glTF failu bez iegultiem līdzekļiem. Tam jāatrodas mapē ar citiem failiem. Nometiet šo mapi uz nomešanas zonas, lai izveidotu vienu failu, ko var izmantot."
+    "onlyEmbeddedAssets": "Jūs mēģinājāt augšupielādēt glTF failu bez iegultiem līdzekļiem. Tam jāatrodas mapē ar citiem failiem. Nometiet šo mapi uz nomešanas zonas, lai izveidotu vienu failu, ko var izmantot.",
+    "placeAnnotation": "Place annotation in 3D model"
   }
 }

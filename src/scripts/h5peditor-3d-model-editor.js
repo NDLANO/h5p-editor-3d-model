@@ -1,7 +1,8 @@
 import threeDModelConversionDropzone from '@components/threed-model-conversion-dropzone.js';
 import threeDModelPreview from '@components/threed-model-preview.js';
+import '@styles/h5peditor-3d-model.scss';
 
-export default class threeDModEleditor {
+export default class threeDModelEditor extends H5P.EventDispatcher {
   /**
    * Timeout in milliseconds to wait for image to load.
    * @constant {number}
@@ -30,6 +31,8 @@ export default class threeDModEleditor {
    * @throws {Error} No image found.
    */
   constructor(parent, field, params, setValue) {
+    super();
+
     this.parent = parent;
     this.field = field;
     this.params = params;
@@ -59,18 +62,22 @@ export default class threeDModEleditor {
     this.filePreview = this.fieldInstance.$file.get(0);
 
     // Create preview
-    this.preview = new threeDModelPreview({
-    }, {
-      onDelete: (button) => {
-        this.fieldInstance.confirmRemovalDialog.show(
-          H5P.jQuery(button).offset().top
-        );
+    this.preview = new threeDModelPreview(
+      {},
+      {
+        onDeleted: (button) => {
+          this.fieldInstance.confirmRemovalDialog.show(
+            H5P.jQuery(button).offset().top
+          );
+        },
+        onModelClicked: (surface) => {
+          this.trigger('modelClicked', { surface });
+        }
       }
-    });
-    this.modelPreview = this.preview.getDOM();
+    );
 
     this.filePreview.parentNode.insertBefore(
-      this.modelPreview, this.filePreview
+      this.preview.getDOM(), this.filePreview
     );
 
     this.fieldInstance.confirmRemovalDialog.on('confirmed', () => {
@@ -113,6 +120,7 @@ export default class threeDModEleditor {
 
     this.fieldInstance.on('uploadProgress', () => {
       this.preview.hide();
+      this.trigger('previewVisibilityChanged', { visibility: false });
     });
 
     // React on file changes
@@ -127,11 +135,46 @@ export default class threeDModEleditor {
   }
 
   /**
+   * Update annotation,
+   * @param {string} id Id of annotation.
+   * @param {object} [params] Parameters to update.
+   */
+  updateAnnotation(id, params = {}) {
+    if (typeof id !== 'string') {
+      return;
+    }
+
+    this.preview.updateAnnotation(id, params);
+  }
+
+  /**
+   * Remove annotation
+   * @param {string} id If of annotation to remove.
+   */
+  removeAnnotation(id) {
+    if (typeof id !== 'string') {
+      return;
+    }
+
+    this.preview.removeAnnotation(id);
+  }
+
+  /**
+   * Highlight the preview.
+   */
+  highlight() {
+    this.preview.highlight();
+  }
+
+  /**
    * Reset model.
    */
   resetModel() {
     this.preview.setModel();
+    this.trigger('modelReset');
+
     this.preview.hide();
+    this.trigger('previewVisibilityChanged', { visibility: false });
   }
 
   /**
@@ -150,6 +193,7 @@ export default class threeDModEleditor {
     this.preview.setModel(src);
 
     this.preview.show();
+    this.trigger('previewVisibilityChanged', { visibility: true });
   }
 
   /**
@@ -347,7 +391,7 @@ export default class threeDModEleditor {
    */
   showFileIcon(type) {
     // Wait for image. File.addFile() might not have completed yet
-    const waitForImg = (timeout = threeDModEleditor.IMAGE_LOAD_TIMEOUT_MS) => {
+    const waitForImg = (timeout = threeDModelEditor.IMAGE_LOAD_TIMEOUT_MS) => {
       if (timeout <= 0) {
         return;
       }
@@ -365,8 +409,8 @@ export default class threeDModEleditor {
       }
       else {
         setTimeout(() => {
-          waitForImg(timeout - threeDModEleditor.IMAGE_LOAD_TIMEOUT_DELTA_MS);
-        }, threeDModEleditor.IMAGE_LOAD_TIMEOUT_DELTA_MS);
+          waitForImg(timeout - threeDModelEditor.IMAGE_LOAD_TIMEOUT_DELTA_MS);
+        }, threeDModelEditor.IMAGE_LOAD_TIMEOUT_DELTA_MS);
       }
     };
 
