@@ -1,4 +1,5 @@
 import Annotations from '@models/annotations.js';
+import Util from '@services/util.js';
 import '@styles/h5peditor-3d-model-annotations.scss';
 
 export default class threeDModelAnnotationsEditor {
@@ -12,7 +13,13 @@ export default class threeDModelAnnotationsEditor {
    */
   constructor(parent, field, params, setValue) {
     this.parent = parent;
-    this.field = field;
+    this.field = Util.extend({
+      threeDModelAnnotations: {
+        annotationIdField: 'id',
+        annotationTextField: 'text',
+        annotationSurfaceField: 'surface'
+      }
+    }, field);
     this.params = params;
     this.setValue = setValue;
 
@@ -50,10 +57,6 @@ export default class threeDModelAnnotationsEditor {
 
     // Errors (or add your own)
     this.$errors = this.$container.find('.h5p-errors');
-
-    if (!this.field.threeDModelAnnotations?.modelFileField) {
-      return;
-    }
 
     this.modelFieldInstance = H5PEditor.findField(
       this.field.threeDModelAnnotations.modelFileField, this.parent
@@ -179,15 +182,21 @@ export default class threeDModelAnnotationsEditor {
     groups.forEach((group) => {
       // Get field instances of group
       const idFieldInstance = group.children.find((child) => {
-        return child.field.name === 'id';
+        return child.field.name ===
+          this.field.threeDModelAnnotations.annotationIdField;
       });
 
       const textFieldInstance = group.children.find((child) => {
-        return child instanceof H5PEditor.Text && child.field.name === 'text';
+        return (
+          child instanceof H5PEditor.Text &&
+          child.field.name ===
+            this.field.threeDModelAnnotations.annotationTextField
+        );
       });
 
       const surfaceFieldInstance = group.children.find((child) => {
-        return child.field.name === 'surface';
+        return child.field.name ===
+          this.field.threeDModelAnnotations.annotationSurfaceField;
       });
 
       if (!idFieldInstance || !textFieldInstance || !surfaceFieldInstance) {
