@@ -85,14 +85,12 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
     this.resizeButton = document.createElement('button');
     this.resizeButton.classList.add('h5peditor-3d-model-resize-button');
     this.resizeButton.addEventListener('click', () => {
-      const small = this.preview.getDOM().classList.contains('large');
+      const large = this.preview.toggleLargeView();
 
-      this.preview.getDOM().classList.toggle('large', !small);
-      this.resizeButton.classList.toggle('large', !small);
-
-      const ariaLabel = small ?
-        H5PEditor.t('H5PEditor.ThreeDModel', 'sizeUp') :
-        H5PEditor.t('H5PEditor.ThreeDModel', 'sizeDown');
+      this.resizeButton.classList.toggle('large', large);
+      const ariaLabel = large ?
+        H5PEditor.t('H5PEditor.ThreeDModel', 'sizeDown') :
+        H5PEditor.t('H5PEditor.ThreeDModel', 'sizeUp');
       this.resizeButton.setAttribute('aria-label', ariaLabel);
     });
     this.resizeButton.setAttribute(

@@ -20,6 +20,8 @@ export default class threeDModelPreview {
       onModelClicked: () => {}
     }, callbacks);
 
+    this.isLargeView = false;
+
     this.model = new ThreeDModel(
       {
         className: 'h5peditor-3d-model-preview-model'
@@ -67,6 +69,21 @@ export default class threeDModelPreview {
    */
   hide() {
     this.dom.classList.add('display-none');
+  }
+
+  /**
+   * Toggle large view.
+   * @param {boolean} [large] If set, use. Otherwise use state.
+   * @returns {boolean} True if new state is large view. Else false
+   */
+  toggleLargeView(large) {
+    large = large ?? !this.isLargeView;
+
+    this.dom.classList.toggle('large', large);
+
+    this.isLargeView = large;
+
+    return this.isLargeView;
   }
 
   /**
