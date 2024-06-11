@@ -35,6 +35,10 @@
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   },
+  "dependencies": {
+    "@google/model-viewer": "^3.5.0",
+    "he": "^1.2.0"
+  },
   "browserslist": "> 0.5%, last 3 versions, Firefox ESR, not dead",
   "type": "module"
 }

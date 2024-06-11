@@ -21,6 +21,13 @@ export default class threeDModelAnnotationsEditor {
       }
     }, field);
     this.params = params;
+
+    if (this.params.annotations) {
+      this.params.annotations.forEach((annotation) => {
+        annotation.text = Util.purifyHTML(annotation.text);
+      });
+    }
+
     this.setValue = setValue;
 
     this.handleDocumentClicked = this.handleDocumentClicked.bind(this);
