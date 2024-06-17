@@ -258,6 +258,7 @@ export default class threeDModelAnnotationsEditor {
           surfaceFieldInstance: surfaceFieldInstance,
         }
       );
+      this.setValue(this.field, this.params);
 
       // Inject button next to text field
       const inputWrapper = document.createElement('div');
@@ -346,6 +347,8 @@ export default class threeDModelAnnotationsEditor {
       // Click on model and received surface
 
       this.annotations.update(id, event.data.surface);
+      this.setValue(this.field, this.params);
+
       this.modelFieldInstance.off('modelClicked');
       this.setActiveAnnotationButton();
     }
