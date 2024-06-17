@@ -20,7 +20,7 @@ export default class threeDModelAnnotationsEditor {
         annotationSurfaceField: 'surface'
       }
     }, field);
-    this.params = params;
+    this.params = Util.extend({}, params);
 
     if (this.params.annotations) {
       this.params.annotations.forEach((annotation) => {
