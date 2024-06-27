@@ -157,7 +157,10 @@ export default class threeDModelAnnotationsEditor {
      * Workaround for bug in H5P core (see https://h5ptechnology.atlassian.net/browse/HFP-3989)
      * List editor widgets would not remove items from DOM.
      */
-    this.listInstance.widget?.container?.querySelectorAll('.h5p-li.listgroup')
+    const listEditorParent = this.listInstance.widget?.container ??
+      this.$container.get(0);
+
+    listEditorParent.querySelectorAll('.h5p-li.listgroup')
       .forEach((listItem) => {
         listItem.remove();
       });
