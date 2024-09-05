@@ -2,25 +2,22 @@ import threeDModelConversionDropzone from '@components/threed-model-conversion-d
 import threeDModelPreview from '@components/threed-model-preview.js';
 import '@styles/h5peditor-3d-model.scss';
 
+/** @constant {number} IMAGE_LOAD_TIMEOUT_MS Timeout in milliseconds to wait for image to load. */
+export const IMAGE_LOAD_TIMEOUT_MS = 500;
+
+/** @constant {number} IMAGE_LOAD_TIMEOUT_DELTA_MS Timeout delts in milliseconds to wait for image to load. */
+export const IMAGE_LOAD_TIMEOUT_DELTA_MS = 20;
+
+/** @constant {object} XHR_READY_STATES XHR readyState mapping from state name to state value. */
+export const XHR_READY_STATES = {
+  UNSENT: 0,
+  OPENED: 1,
+  HEADERS_RECEIVED: 2,
+  LOADING: 3,
+  DONE: 4
+};
+
 export default class threeDModelEditor extends H5P.EventDispatcher {
-  /**
-   * Timeout in milliseconds to wait for image to load.
-   * @constant {number}
-   * @returns {number} Timeout in milliseconds.
-   */
-  static get IMAGE_LOAD_TIMEOUT_MS() {
-    return 500;
-  }
-
-  /**
-   * Timeout delts in milliseconds to wait for image to load.
-   * @constant {number}
-   * @returns {number} Timeout delta in milliseconds.
-   */
-  static get IMAGE_LOAD_TIMEOUT_DELTA_MS() {
-    return 20;
-  }
-
   /**
    * Used to load additional GLTF resources
    * @class H5PEditor.ThreeDModel
@@ -256,7 +253,7 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', src);
         xhr.onreadystatechange = () => {
-          if (xhr.readyState !== 4) {
+          if (xhr.readyState !== XHR_READY_STATES.DONE) {
             return;
           }
 
@@ -414,7 +411,7 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
    */
   showFileIcon(type) {
     // Wait for image. File.addFile() might not have completed yet
-    const waitForImg = (timeout = threeDModelEditor.IMAGE_LOAD_TIMEOUT_MS) => {
+    const waitForImg = (timeout = IMAGE_LOAD_TIMEOUT_MS) => {
       if (timeout <= 0) {
         return;
       }
@@ -432,8 +429,8 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
       }
       else {
         setTimeout(() => {
-          waitForImg(timeout - threeDModelEditor.IMAGE_LOAD_TIMEOUT_DELTA_MS);
-        }, threeDModelEditor.IMAGE_LOAD_TIMEOUT_DELTA_MS);
+          waitForImg(timeout - IMAGE_LOAD_TIMEOUT_DELTA_MS);
+        }, IMAGE_LOAD_TIMEOUT_DELTA_MS);
       }
     };
 

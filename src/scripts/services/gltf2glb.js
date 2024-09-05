@@ -4,6 +4,34 @@
  * The MIT License
  * Copyright (c) 2017 Saurabh Bhatia
  */
+
+/** @constant {number} FILE_HEADER_SIZE GLB file header size. */
+const FILE_HEADER_SIZE = 12;
+
+/** @constant {number} JSON_CHUNK_HEADER_SIZE GLB file json chunk header size. */
+const JSON_CHUNK_HEADER_SIZE = 8;
+
+/** @constant {number} GLTF_VERSION GLTF version. */
+const GLTF_VERSION = 2;
+
+/** @constant {number} BIN_CHUNK_HEADER_SIZE GLB file bin chunk header size. */
+const BIN_CHUNK_HEADER_SIZE = 8;
+
+/** @constant {number} BUFFER_INDEX_INCREMENT Buffer index increment. */
+const BUFFER_INDEX_INCREMENT = 4;
+
+/** @constant {number} GLTF_HEADER GLTF header marker. */
+const GLTF_HEADER = 0x46546C67;
+
+/** @constant {number} CHUNK_JSON JSON chunk marker. */
+const CHUNK_JSON = 0x4E4F534A;
+
+/** @constant {number} CHUNK_BIN BIN chunk marker. */
+const CHUNK_BIN = 0x004E4942;
+
+/** @constant {number} JSON_PADDING JSON padding. */
+const JSON_PADDING = 0x20;
+
 class threeDModelGLTF2GLB {
   /**
    * @class H5PEditor.threeDModelGLTF2GLB
@@ -170,7 +198,7 @@ class threeDModelGLTF2GLB {
         const pendingImages = images.map((image) => {
           return this.getDataFromUri(image).then((data) => {
             if (data === undefined) {
-              delete image['uri'];
+              delete image.uri;
               return;
             }
 
@@ -187,9 +215,9 @@ class threeDModelGLTF2GLB {
             const bufferViewIndex = this.gltf.bufferViews.length;
             this.gltf.bufferViews.push(bufferView);
             this.outputBuffers.push(data);
-            image['bufferView'] = bufferViewIndex;
-            image['mimeType'] = this.getMimeType(image.uri);
-            delete image['uri'];
+            image.bufferView = bufferViewIndex;
+            image.mimeType = this.getMimeType(image.uri);
+            delete image.uri;
           });
         });
 
@@ -202,10 +230,6 @@ class threeDModelGLTF2GLB {
    * @returns {Blob} File blob.
    */
   buildOutputFile() {
-    const Binary = {
-      Magic: 0x46546C67
-    };
-
     for (let i = 0, a = this.gltf.bufferViews; i < a.length; i++) {
       const bufferView = a[i];
       if (bufferView.byteOffset === undefined) {
@@ -233,28 +257,28 @@ class threeDModelGLTF2GLB {
     }
 
     const totalSize =
-      12 + // file header: magic + version + length
-      8 + // json chunk header: json length + type
+      FILE_HEADER_SIZE +
+      JSON_CHUNK_HEADER_SIZE +
       jsonAlignedLength +
-      8 + // bin chunk header: chunk length + type
+      BIN_CHUNK_HEADER_SIZE +
       binBufferSize;
 
     const finalBuffer = new ArrayBuffer(totalSize);
     const dataView = new DataView(finalBuffer);
 
     let bufIndex = 0;
-    dataView.setUint32(bufIndex, Binary.Magic, true);
-    bufIndex += 4;
-    dataView.setUint32(bufIndex, 2, true);
-    bufIndex += 4;
+    dataView.setUint32(bufIndex, GLTF_HEADER, true);
+    bufIndex += BUFFER_INDEX_INCREMENT;
+    dataView.setUint32(bufIndex, GLTF_VERSION, true);
+    bufIndex += BUFFER_INDEX_INCREMENT;
     dataView.setUint32(bufIndex, totalSize, true);
-    bufIndex += 4;
+    bufIndex += BUFFER_INDEX_INCREMENT;
 
     // JSON
     dataView.setUint32(bufIndex, jsonAlignedLength, true);
-    bufIndex += 4;
-    dataView.setUint32(bufIndex, 0x4E4F534A, true);
-    bufIndex += 4;
+    bufIndex += BUFFER_INDEX_INCREMENT;
+    dataView.setUint32(bufIndex, CHUNK_JSON, true);
+    bufIndex += BUFFER_INDEX_INCREMENT;
 
     for (let j = 0; j < jsonBuffer.length; j++) {
       dataView.setUint8(bufIndex, jsonBuffer[j]);
@@ -263,16 +287,16 @@ class threeDModelGLTF2GLB {
 
     if (padding !== undefined) {
       for (let j = 0; j < padding; j++) {
-        dataView.setUint8(bufIndex, 0x20);
+        dataView.setUint8(bufIndex, JSON_PADDING);
         bufIndex++;
       }
     }
 
     // BIN
     dataView.setUint32(bufIndex, binBufferSize, true);
-    bufIndex += 4;
-    dataView.setUint32(bufIndex, 0x004E4942, true);
-    bufIndex += 4;
+    bufIndex += BUFFER_INDEX_INCREMENT;
+    dataView.setUint32(bufIndex, CHUNK_BIN, true);
+    bufIndex += BUFFER_INDEX_INCREMENT;
 
     for (let i = 0; i < this.outputBuffers.length; i++) {
       const bufoffset = bufIndex + this.bufferMap.get(i);
