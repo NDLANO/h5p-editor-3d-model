@@ -136,7 +136,7 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
     }
 
     // Only gltf supported
-    const extension = this.params.path.split('.').pop().toLowerCase();
+    const extension = this.params.path.split('#')[0].split('.').pop().toLowerCase();
     if (!this.field.threeDModel.fileTypeExtensions.includes(extension)) {
       return;
     }
