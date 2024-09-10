@@ -96,11 +96,6 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
     });
 
     this.parent.ready( () => {
-      // Create dropzone
-      this.dropzone = this.dropzone ||
-        new threeDModelConversionDropzone((result) => {
-          this.handleConversionDone(result);
-        });
       const container = this.$container.get(0);
       container.parentNode.insertBefore(
         this.dropzone.getDOM(), container.nextSibling
@@ -112,22 +107,6 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
 
     this.fileIcon = document.createElement('div');
     this.fileIcon.classList.add('h5peditor-3d-model-file-icon');
-
-    // Update icon on loadup
-    H5PEditor.followField(this.parent, this.field.name, (event) => {
-      if (!event || !event.path) {
-        this.resetModel();
-        return;
-      }
-
-      // Only gltf supported
-      const extension = event.path.split('.').pop().toLowerCase();
-      if (!this.field.threeDModel.fileTypeExtensions.includes(extension)) {
-        return;
-      }
-
-      this.setModel(event.path);
-    });
 
     this.fieldInstance.on('uploadProgress', () => {
       this.preview.hide();
@@ -144,6 +123,25 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
         this.handleFileUploaded(event.path);
       }
     });
+
+    // Create dropzone
+    this.dropzone = new threeDModelConversionDropzone((result) => {
+      this.handleConversionDone(result);
+    });
+
+    // Set initial model
+    if (!this.params?.path) {
+      this.resetModel();
+      return;
+    }
+
+    // Only gltf supported
+    const extension = this.params.path.split('.').pop().toLowerCase();
+    if (!this.field.threeDModel.fileTypeExtensions.includes(extension)) {
+      return;
+    }
+
+    this.setModel(this.params.path);
   }
 
   /**
