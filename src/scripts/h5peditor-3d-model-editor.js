@@ -2,12 +2,6 @@ import threeDModelConversionDropzone from '@components/threed-model-conversion-d
 import threeDModelPreview from '@components/threed-model-preview.js';
 import '@styles/h5peditor-3d-model.scss';
 
-/** @constant {number} IMAGE_LOAD_TIMEOUT_MS Timeout in milliseconds to wait for image to load. */
-export const IMAGE_LOAD_TIMEOUT_MS = 500;
-
-/** @constant {number} IMAGE_LOAD_TIMEOUT_DELTA_MS Timeout delts in milliseconds to wait for image to load. */
-export const IMAGE_LOAD_TIMEOUT_DELTA_MS = 20;
-
 /** @constant {object} XHR_READY_STATES XHR readyState mapping from state name to state value. */
 export const XHR_READY_STATES = {
   UNSENT: 0,
@@ -403,38 +397,6 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
     this.fieldInstance.addFile();
 
     this.fieldInstance.changes.forEach((change) => change());
-  }
-
-  /**
-   * Show file pseudo icon.
-   * @param {string} type File type.
-   */
-  showFileIcon(type) {
-    // Wait for image. File.addFile() might not have completed yet
-    const waitForImg = (timeout = IMAGE_LOAD_TIMEOUT_MS) => {
-      if (timeout <= 0) {
-        return;
-      }
-
-      const img = this.fieldInstance.$file.find('img').get(0);
-      if (img) {
-        this.fileIcon.title = type;
-        this.fileIcon.innerText = type;
-        img.style.display = 'none';
-        const thumbnail =
-          this.fieldInstance.$file.get(0).querySelector('.thumbnail');
-        if (thumbnail) {
-          thumbnail.append(this.fileIcon);
-        }
-      }
-      else {
-        setTimeout(() => {
-          waitForImg(timeout - IMAGE_LOAD_TIMEOUT_DELTA_MS);
-        }, IMAGE_LOAD_TIMEOUT_DELTA_MS);
-      }
-    };
-
-    waitForImg();
   }
 
   /**
