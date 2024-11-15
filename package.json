@@ -1,6 +1,6 @@
 {
   "name": "h5p-editor-3d-model",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Editor widget for 3D model",
   "private": true,
   "scripts": {
