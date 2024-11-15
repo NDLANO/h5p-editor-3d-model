@@ -46,6 +46,7 @@ export default {
     'h5p-editor-3d-model': './src/entries/dist.js'
   },
   output: {
+    chunkFormat: false,
     filename: '[name].js',
     path: _resolve(__dirname, 'dist'),
     clean: true
