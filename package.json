@@ -27,7 +27,7 @@
     "eslint-config-snordian-h5p": "github:otacke/eslint-config-snordian-h5p",
     "@google/model-viewer": "^4.0.0",
     "mini-css-extract-plugin": "^2.9.2",
-    "sass": "^1.80.6",
+    "sass": "^1.81.0",
     "sass-loader": "^16.0.3",
     "stylelint": "^16.10.0",
     "stylelint-config-recommended": "^14.0.1",
