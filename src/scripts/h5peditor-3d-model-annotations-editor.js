@@ -160,10 +160,22 @@ export default class threeDModelAnnotationsEditor {
     const listEditorParent = this.listInstance.widget?.container ??
       this.$container.get(0);
 
-    listEditorParent.querySelectorAll('.h5p-li.listgroup')
-      .forEach((listItem) => {
-        listItem.remove();
+    listEditorParent.querySelectorAll('.h5p-li.listgroup').forEach((listItem) => {
+      listItem.remove();
+    });
+
+    /*
+     * Workaround for VerticalTabs widget not removing items from DOM when removed from list instance.
+     */
+    if (this.listInstance.widget instanceof H5PEditor.VerticalTabs) {
+      listEditorParent.querySelectorAll('.h5p-vtab-li').forEach((vtListItem) => {
+        vtListItem.remove();
       });
+
+      listEditorParent.querySelectorAll('.h5p-vtab-form').forEach((vtFormItem) => {
+        vtFormItem.remove();
+      });
+    }
 
     /*
      * Ensure there's an initial item. En passant this works around bug in H5P
@@ -172,6 +184,14 @@ export default class threeDModelAnnotationsEditor {
      * there are no items left.
      */
     this.listInstance.addItem();
+
+    /*
+     * Workaround for VerticalTabs widget not reacting to calls on list instance.
+     * Making the newly added item the current one.
+     */
+    if (this.listInstance.widget instanceof H5PEditor.VerticalTabs) {
+      listEditorParent.querySelector('.h5p-vtab-form')?.classList.add('h5p-current');
+    }
   }
 
   /**
