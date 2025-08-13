@@ -1,3 +1,4 @@
+import Util from '@services/util.js';
 import threeDModelConversionDropzone from '@components/threed-model-conversion-dropzone.js';
 import threeDModelPreview from '@components/threed-model-preview.js';
 import '@styles/h5peditor-3d-model.scss';
@@ -54,7 +55,10 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
 
     // Create preview
     this.preview = new threeDModelPreview(
-      {},
+      {
+        alt: Util.purifyHTML(this.parent.params?.alt ?? ''),
+        a11y: this.buildModelA11y()
+      },
       {
         onDeleted: (button) => {
           this.fieldInstance.confirmRemovalDialog.show(
@@ -418,5 +422,32 @@ export default class threeDModelEditor extends H5P.EventDispatcher {
    */
   remove() {
     this.$container.remove();
+  }
+
+  /**
+   * Build a11y attributes.
+   * @returns {object|undefined} A11y attributes.
+   */
+  buildModelA11y() {
+    const a11yProps = [
+      'back', 'front', 'left', 'right',
+      'lower-back', 'lower-front', 'lower-left', 'lower-right',
+      'upper-back', 'upper-front', 'upper-left', 'upper-right',
+      'interaction-prompt'
+    ];
+
+    const a11yAttributes = {};
+    a11yProps.forEach((prop) => {
+      const translation = H5PEditor.t('H5PEditor.ThreeDModel', prop);
+      if (translation) {
+        a11yAttributes[prop] = translation;
+      }
+    });
+
+    if (Object.keys(a11yAttributes).length === 0) {
+      return;
+    }
+
+    return a11yAttributes;
   }
 }

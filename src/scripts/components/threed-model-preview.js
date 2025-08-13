@@ -24,7 +24,9 @@ export default class threeDModelPreview {
 
     this.model = new ThreeDModel(
       {
-        className: 'h5peditor-3d-model-preview-model'
+        className: 'h5peditor-3d-model-preview-model',
+        alt: this.params.alt,
+        a11y: this.params.a11y
       },
       {
         onModelClicked: (surface) => {

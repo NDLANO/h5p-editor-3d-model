@@ -166,7 +166,7 @@ export default class ThreeDModel {
       }
 
       label.classList.toggle('display-none', !params.text);
-      label.textContent = params.text;
+      label.textContent = Util.purifyHTML(params.text);
     }
   }
 
@@ -229,6 +229,10 @@ export default class ThreeDModel {
         a11yAttributes[prop] = params[prop];
       }
     });
+
+    if (Object.keys(a11yAttributes).length === 0) {
+      return ''; // No a11y attributes set
+    }
 
     // Set the attribute on the DOM element with the new object
     return JSON.stringify(a11yAttributes);

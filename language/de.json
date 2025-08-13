@@ -11,6 +11,19 @@
     "onlyVersionTwo": "Diese glTF-Datei hat die Version 1.0. Bitte konvertiere sie zu Version 2.0, um sie hier zu benutzen.",
     "placeAnnotation": "Platziere die Annotation im 3D-Modell",
     "sizeUp": "Vergrößern",
-    "sizeDown": "Verkleinern"
+    "sizeDown": "Verkleinern",
+    "front": "Vorderseite des 3D-Modells",
+    "back": "Rückseite des 3D-Modells",
+    "left": "Linke Seite des 3D-Modells",
+    "right": "Rechte Seite des 3D-Modells",
+    "upper-front": "Obere Vorderseite des 3D-Modells",
+    "upper-back": "Obere Rückseite des 3D-Modells",
+    "upper-left": "Obere linke Seite des 3D-Modells",
+    "upper-right": "Obere rechte Seite des 3D-Modells",
+    "lower-front": "Untere Vorderseite des 3D-Modells",
+    "lower-back": "Untere Rückseite des 3D-Modells",
+    "lower-left": "Untere linke Seite des 3D-Modells",
+    "lower-right": "Untere rechte Seite des 3D-Modells",
+    "interaction-prompt": "Bewege mit der Maus, durch Berührung oder mit den Pfeiltasten, um mit dem 3D-Modell zu interagieren."
   }
 }
