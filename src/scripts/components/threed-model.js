@@ -69,6 +69,7 @@ export default class ThreeDModel {
 
     dom.addEventListener('load', () => {
       this.updateAspectRatio();
+      this.ensureAllHotspotsVisible();
       this.callbacks.onLoad();
     });
 
@@ -231,5 +232,19 @@ export default class ThreeDModel {
 
     // Set the attribute on the DOM element with the new object
     return JSON.stringify(a11yAttributes);
+  }
+
+  /**
+   * Ensure all hotspots are visible. Workaround.
+   * For some reason, not all hotspots are visible unless the animation is played briefly.
+   */
+  ensureAllHotspotsVisible() {
+    this.dom.play?.();
+    this.dom.currentTime = 0;
+
+    window.requestAnimationFrame(() => {
+      this.dom.pause?.();
+      this.dom.currentTime = 0;
+    });
   }
 }
