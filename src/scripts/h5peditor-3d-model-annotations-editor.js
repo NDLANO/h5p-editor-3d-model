@@ -90,7 +90,7 @@ export default class threeDModelAnnotationsEditor {
     });
 
     // Remove annotations when model is removed
-    this.listInstance?.on('removedItem', (event) => {
+    this.listInstance?.on('removedItem', () => {
       /*
        * H5P editor core doesn't inform about moved list items, so we the
        * index that we get here is useless as we cannot track it. We need
